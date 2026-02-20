@@ -1,5 +1,6 @@
 import 'package:frontend/views/nav_screen/cart_screen.dart';
 import 'package:frontend/views/nav_screen/category_screen.dart';
+import 'package:frontend/views/nav_screen/demo_home_screen.dart';
 import 'package:frontend/views/nav_screen/fav_screen.dart';
 import 'package:frontend/views/nav_screen/store_screen.dart';
 import 'package:flutter/material.dart';

@@ -33,15 +33,16 @@ class HomeScreen extends ConsumerWidget {
             child: Container(
               padding: EdgeInsets.fromLTRB(16, topSafeArea + 10, 16, 22),
               decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xff0f4c81), Color(0xff1f6aa5)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(28),
-                  bottomRight: Radius.circular(28),
-                ),
+                color: Color(0xff1f6aa5),
+                // gradient: LinearGradient(
+                //   colors: [Color(0xff0f4c81), Color(0xff1f6aa5)],
+                //   begin: Alignment.topLeft,
+                //   end: Alignment.bottomRight,
+                // ),
+                // borderRadius: BorderRadius.only(
+                //   bottomLeft: Radius.circular(28),
+                //   bottomRight: Radius.circular(28),
+                // ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,13 +96,15 @@ class HomeScreen extends ConsumerWidget {
           SliverPersistentHeader(
             pinned: true,
             delegate: _SearchBarHeaderDelegate(
+              topInset: topSafeArea,
+              backgroundColor: Color(0xff1f6aa5),
               child: Container(
-                color: backgroundColor,
-                padding: const EdgeInsets.fromLTRB(16, 22, 16, 12),
+                color: Color(0xff1f6aa5),
+                padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
                 child: Container(
                   height: 60,
                   decoration: BoxDecoration(
-                    color:   headerColor,
+                    color:  Color(0xff1f6aa5),
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
@@ -123,10 +126,20 @@ class HomeScreen extends ConsumerWidget {
                         color: Colors.grey.shade500,
                         fontSize: 14,
                       ),
+                      filled: true,
+                      fillColor: Colors.white,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide.none,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide.none,
+                      ),
                       prefixIcon: Container(
                         margin: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
-                          color: const Color(0xff0f4c81),
+                          color: Color(0xff1f6aa5),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: const Icon(
@@ -137,7 +150,7 @@ class HomeScreen extends ConsumerWidget {
                       ),
                       suffixIcon:const Icon(
                         Icons.search_rounded,
-                        color: Color(0xff0f4c81),
+                        color: Color(0xff1f6aa5)
                       ),
                       border: InputBorder.none,
                       contentPadding: const EdgeInsets.symmetric(vertical: 16),
@@ -244,15 +257,21 @@ class _HeaderIconButton extends StatelessWidget {
 }
 
 class _SearchBarHeaderDelegate extends SliverPersistentHeaderDelegate {
-  _SearchBarHeaderDelegate({required this.child});
+  _SearchBarHeaderDelegate({
+    required this.child,
+    required this.topInset,
+    required this.backgroundColor,
+  });
 
   final Widget child;
+  final double topInset;
+  final Color backgroundColor;
 
   @override
-  double get minExtent => 78;
+  double get minExtent => topInset + 84;
 
   @override
-  double get maxExtent => 78;
+  double get maxExtent => topInset + 84;
 
   @override
   Widget build(
@@ -260,11 +279,17 @@ class _SearchBarHeaderDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return child;
+    return Container(
+      color: backgroundColor,
+      padding: EdgeInsets.only(top: topInset),
+      child: child,
+    );
   }
 
   @override
   bool shouldRebuild(covariant _SearchBarHeaderDelegate oldDelegate) {
-    return oldDelegate.child != child;
+    return oldDelegate.child != child ||
+        oldDelegate.topInset != topInset ||
+        oldDelegate.backgroundColor != backgroundColor;
   }
 }
