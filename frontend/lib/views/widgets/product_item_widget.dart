@@ -59,7 +59,12 @@ class ModernProductTile extends ConsumerWidget {
                                  productId: product.id,
                                  description: product.description,
                                  productQuantity: product.productQuantity,
-                                 fullname: product.fullname
+                                 fullname: product.fullname,
+                                 subcategory: product.subcategory,
+                                 popular: product.popular,
+                                 recommend: product.recommend,
+                                 totalrating: product.totalrating,
+                                 averagerating: product.averagerating
                              );
                              showSnackBar(context, "Added To Wishlist");
                            }

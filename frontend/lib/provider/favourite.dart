@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:frontend/model/favourite.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/model/product.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class FavouriteNotifier extends StateNotifier<Map<String,Favourite>>{
+class FavouriteNotifier extends StateNotifier<Map<String,Product>>{
   FavouriteNotifier():super({}){
     _loadFavouriteItem();
   }
@@ -21,7 +22,7 @@ class FavouriteNotifier extends StateNotifier<Map<String,Favourite>>{
       // now the data is in json so we have to first convert it into map of dynamic data which dart can understand.
       final Map<String,dynamic> favouriteMap = jsonDecode(favouriteJson);
       // now we have to convert the dynamic map into map of favourite object using the "fromMap" method of factory constructor
-      final Map<String,Favourite> favourites = favouriteMap.map((key,value)=>MapEntry(key, Favourite.fromJson(value)));
+      final Map<String,Product> favourites = favouriteMap.map((key,value)=>MapEntry(key, Product.fromJson(value)));
       // updating the state with the loaded data
       state = favourites;
     }
@@ -46,18 +47,28 @@ class FavouriteNotifier extends StateNotifier<Map<String,Favourite>>{
     required String category,
     required String vendorId,
     required List<String> images,
+    required String subcategory,
+    required bool popular,
+    required bool recommend,
+    required int totalrating,
+    required double averagerating,
     required String productId,
     required String description,
     required int productQuantity,
     required String fullname
 })async {
-    state[productId] = Favourite(
+    state[productId] = Product(
         productName: productName,
         productPrice: productPrice,
         category: category,
         vendorId: vendorId,
         images: images,
-        productId: productId,
+        subcategory: subcategory,
+        popular: false,
+        recommend: false,
+        totalrating: 0,
+        averagerating: 0.0,
+        id: productId,
         description: description,
         productQuantity: productQuantity,
         fullname: fullname
@@ -76,8 +87,8 @@ class FavouriteNotifier extends StateNotifier<Map<String,Favourite>>{
     _saveFavouriteItem();
   }
 
-  Map<String,Favourite> get getFavouriteItem => state;
+  Map<String,Product> get getFavouriteItem => state;
 
 }
 
-final favouriteProvider = StateNotifierProvider<FavouriteNotifier,Map<String,Favourite>>((ref)=>FavouriteNotifier());
+final favouriteProvider = StateNotifierProvider<FavouriteNotifier,Map<String,Product>>((ref)=>FavouriteNotifier());

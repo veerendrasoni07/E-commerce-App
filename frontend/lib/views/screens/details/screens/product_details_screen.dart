@@ -76,7 +76,12 @@ class _ProductDetailsScreenState extends ConsumerState<ProductDetailsScreen> {
                       productId: widget.product.id,
                       description: widget.product.description,
                       productQuantity: widget.product.productQuantity,
-                      fullname: widget.product.fullname
+                      fullname: widget.product.fullname,
+                      subcategory: widget.product.subcategory,
+                      popular: widget.product.popular,
+                      recommend: widget.product.recommend,
+                      totalrating: widget.product.totalrating
+                      ,averagerating: widget.product.averagerating
                   );
                   showSnackBar(context, "Added To Wishlist");
                 }
@@ -153,60 +158,60 @@ class _ProductDetailsScreenState extends ConsumerState<ProductDetailsScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(widget.product.productName,style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.bold),overflow: TextOverflow.ellipsis,),
-                    Text("₹${widget.product.productPrice}",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.bold),),
-                  ],
-                ),
-              ),
-              if(widget.product.totalrating!=0)
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Row(
-                    children: [
-                      Icon(Icons.star,color: Colors.amber,),
-                      Text(widget.product.averagerating.toStringAsFixed(1),style: GoogleFonts.montserrat(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.grey.shade600),),
-                      Text('(${widget.product.totalrating.toString()})',style: GoogleFonts.montserrat(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.grey.shade600),)
-                    ],
-                  ),
-                ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text(widget.product.category,style: GoogleFonts.quicksand(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.grey.shade600),),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("About",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.bold),),
-                      Text(widget.product.description,style: GoogleFonts.quicksand(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey.shade600),)
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                  height: 300,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemCount: relatedProduct.length,
-                      itemBuilder: (context,index){
+             Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+                   Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                     children: [
+                       Text(widget.product.productName,style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.bold),overflow: TextOverflow.ellipsis,),
+                       Text("₹${widget.product.productPrice}",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.bold),),
+                     ],
+                   ),
+                   if(widget.product.totalrating!=0)
+                     Padding(
+                       padding: const EdgeInsets.only(left: 8.0),
+                       child: Row(
+                         children: [
+                           Icon(Icons.star,color: Colors.amber,),
+                           Text(widget.product.averagerating.toStringAsFixed(1),style: GoogleFonts.montserrat(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.grey.shade600),),
+                           Text('(${widget.product.totalrating.toString()})',style: GoogleFonts.montserrat(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.grey.shade600),)
+                         ],
+                       ),
+                     ),
+                   Text(widget.product.category,style: GoogleFonts.quicksand(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.grey.shade600),),
+                   SingleChildScrollView(
+                       child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                           Text("About",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.bold),),
+                           Text(widget.product.description,style: GoogleFonts.quicksand(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey.shade600),)
+                         ],
+                     ),
+                   ),
+                   Text("Related Products",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.bold),),
+                   if(relatedProduct.isNotEmpty)
+                     SizedBox(
+                       height: MediaQuery.of(context).size.height * 0.35,
+                       child: ListView.builder(
+                           scrollDirection: Axis.horizontal,
+                           shrinkWrap: true,
+                           itemCount: relatedProduct.length,
+                           itemBuilder: (context,index){
+                             final product = relatedProduct[index];
+                             return ModernProductTile(
+                                 product: product
+                             );
+                           }
+                       ),
+                     ),
 
-                        final product = relatedProduct[index];
-                        return ModernProductTile(
-                            product: product
-                        );
-                      }
-                  ),
-              ),
-
-              SizedBox(height: 100,)
+                   SizedBox(height: 100,)
+                 ],
+               ),
+             )
 
 
 

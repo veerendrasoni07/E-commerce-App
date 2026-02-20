@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../screens/details/screens/search_product_screen.dart';
 import '../widgets/cart_widget.dart';
 
 class CartScreen extends ConsumerStatefulWidget {
@@ -23,9 +24,63 @@ class _CartScreenState extends ConsumerState<CartScreen> {
     final cartData = ref.watch(cartProvider);
     final _cartProvider = ref.read(cartProvider.notifier);
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
-          child: HeaderWidget2()
+      appBar: AppBar(
+        backgroundColor: Color(0xff0f4c81),
+        toolbarHeight:80,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(28),)
+          ,),
+        title: TextField(
+          readOnly: true,
+          textInputAction: TextInputAction.search,
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchProductScreen()));
+          },
+          decoration: InputDecoration(
+            hintText: 'Search products, brands and categories',
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide.none
+            ),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide.none
+            ),
+            hintStyle: TextStyle(
+              color: Colors.grey.shade500,
+              fontSize: 14,
+            ),
+            fillColor: Colors.white,
+            filled: true,
+            prefixIcon: Container(
+              margin: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: const Color(0xff0f4c81),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Icon(
+                Icons.camera_alt,
+                size: 20,
+                color: Colors.white,
+              ),
+            ),
+            suffixIcon:IconButton(
+              onPressed: (){
+
+              },
+              icon: const Icon(
+                Icons.search_rounded,
+                color: Color(0xff0f4c81),
+              ),
+            ),
+            border: InputBorder.none,
+            contentPadding: const EdgeInsets.symmetric(vertical: 16),
+          ),
+        ),
+        actions: [
+          IconButton(onPressed: (){}, icon: Icon(Icons.support_agent_rounded,color: Colors.white,))
+        ],
       ),
       body: _cartProvider.getCartItems.isEmpty ? Center(
         child: Column(

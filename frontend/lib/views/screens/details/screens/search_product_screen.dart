@@ -51,7 +51,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
       }, icon: Icon(Icons.arrow_back_ios_new_rounded,color: Colors.white,)),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(35),)
+          bottom: Radius.circular(28),)
         ,),
           title: TextField(
             controller: searchController,
@@ -104,6 +104,9 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
               contentPadding: const EdgeInsets.symmetric(vertical: 16),
             ),
           ),
+          actions: [
+            IconButton(onPressed: (){}, icon: Icon(Icons.support_agent_rounded,color: Colors.white,))
+          ],
         ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),

@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../screens/details/screens/product_details_screen.dart';
+
 class FavScreen extends ConsumerStatefulWidget {
   const FavScreen({super.key});
 
@@ -20,14 +22,13 @@ class _FavScreenState extends ConsumerState<FavScreen> {
       appBar: AppBar(
         title: Text(
           "Favourite Screen",
-          style: GoogleFonts.marcellusSc(
+          style: GoogleFonts.poppins(
             textStyle: TextStyle(color: Colors.black),
             letterSpacing: 1.5,
             fontWeight: FontWeight.bold,
-            fontSize: 30
+            fontSize: 24
           ),
         ),
-        centerTitle: true,
       ),
       body: ListView.builder(
         itemCount: favourite.length,
@@ -41,69 +42,78 @@ class _FavScreenState extends ConsumerState<FavScreen> {
                     borderRadius: BorderRadius.circular(20),
                     flex: 5,
                     onPressed: (context){
-                      ref.read(favouriteProvider.notifier).removeFavouriteProduct(favItem.productId);
+                      ref.read(favouriteProvider.notifier).removeFavouriteProduct(favItem.id);
                     },
                     icon: Icons.delete,
-                    label: "Delete",
+                    label: "Remove",
                   )
                 ],
 
               ),
-              child: Card(
-                margin: EdgeInsets.symmetric(vertical: 8,horizontal: 8),
-                elevation: 5,
-                child: Container(
-                  height: 150,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20)
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.network(
-                              favItem.images[0],
-                              height: 150,
-                              width: 150,
-                            ),
-                          )
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+              child: InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductDetailsScreen(product: favItem)));
+                },
+                child: Card(
+                  margin: EdgeInsets.symmetric(vertical: 8,horizontal: 8),
+                  elevation: 5,
+                  child: Container(
+                    height: 150,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20)
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
                           children: [
-                            Text(
-                              favItem.productName,
-                              style: GoogleFonts.quicksand(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.network(
+                                favItem.images[0],
+                                height: 150,
+                                width: 150,
                               ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Text(
-                              "\u{20B9}${favItem.productPrice}",
-                              style: GoogleFonts.quicksand(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold
-                              )
-                            ),
-                            Text(
-                              favItem.category,
-                              style: GoogleFonts.quicksand(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                color: Colors.grey.shade700
-                              )
-                            ),
+                            )
                           ],
                         ),
-                      )
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "favItem.productName favItem.productName favItem.productName favItem.productName",
+                                  style: GoogleFonts.quicksand(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                  ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Text(
+                                  "\u{20B9}${favItem.productPrice}",
+                                  style: GoogleFonts.quicksand(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold
+                                  )
+                                ),
+                                Text(
+                                  favItem.category,
+                                  style: GoogleFonts.quicksand(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    color: Colors.grey.shade700
+                                  )
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
