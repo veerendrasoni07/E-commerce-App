@@ -62,7 +62,9 @@ class _BannerWidgetState extends ConsumerState<BannerWidget> {
                   SmoothPageIndicator(
                     controller: _pageController,
                     count: banners.length,
-                    effect: WormEffect(), // Optional
+                    effect: WormEffect(
+                      activeDotColor: Colors.black
+                    ), // Optional
                   ),
               ],
       )

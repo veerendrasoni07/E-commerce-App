@@ -9,15 +9,12 @@ class ReuseableTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(title,style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.bold),),
-          Text(subtitle,style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.blueAccent),),
-        ],
-      ),
+    return  Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(title,style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.bold),),
+        Text(subtitle,style: GoogleFonts.montserrat(fontSize: 14,fontWeight: FontWeight.bold,color: Colors.blueAccent),),
+      ],
     );
   }
 }

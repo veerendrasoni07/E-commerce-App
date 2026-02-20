@@ -31,14 +31,17 @@ class _CategoryWidgetState extends ConsumerState<CategoryWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ReuseableTextWidget(title: "Categories", subtitle: "View All"),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: ReuseableTextWidget(title: "Categories", subtitle: "View All"),
+        ),
          GridView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: categories.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 4,
+                  mainAxisSpacing: 4,
                   crossAxisCount: 4,
                 ),
                 itemBuilder: (context, index) {
@@ -46,22 +49,19 @@ class _CategoryWidgetState extends ConsumerState<CategoryWidget> {
                   return InkWell(
                     onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=>InnerCategoryScreen(category: category))),
                     child: SizedBox(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.network(
-                                category.image,
-                                height: 50,
-                                width: 50,
-                                fit: BoxFit.fill,
-                              ),
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              category.image,
+                              height: 50,
+                              width: 50,
+                              fit: BoxFit.fill,
                             ),
-                            Text(category.name,style: TextStyle(fontWeight: FontWeight.bold),)
-                          ],
-                        ),
+                          ),
+                          Text(category.name,style: TextStyle(fontWeight: FontWeight.bold),overflow: TextOverflow.ellipsis,)
+                        ],
                       ),
                     ),
                   );

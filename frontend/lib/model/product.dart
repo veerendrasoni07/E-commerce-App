@@ -58,19 +58,19 @@ class Product {
   factory Product.fromJson(Map<String, dynamic> map) {
     return Product(
       id: map['_id'] as String,
-      productName: map['productName'] as String,
-      productPrice: map['productPrice'] as int,
-      productQuantity: map['productQuantity'] as int,
-      description: map['description'] as String,
-      category: map['category'] as String,
-      subcategory: map['subcategory'] as String,
-      vendorId: map['vendorId'] as String,
-      fullname: map['fullname'] as String,
+      productName: map['productName'] ?? "",
+      productPrice: map['productPrice'] ?? 0,
+      productQuantity: map['productQuantity'] ?? 0,
+      description: map['description'] ?? "",
+      category: map['category'] ?? "",
+      subcategory: map['subcategory'] ?? "",
+      vendorId: map['vendorId'] ?? "",
+      fullname: map['fullname'] ?? "",
       images:List<String>.from(map['images']),
-      popular: map['popular'] as bool,
-      recommend: map['recommend'] as bool,
-      totalrating: map['totalrating'] as int,
-      averagerating: (map['averagerating'] is int ? (map['averagerating'] as int).toDouble() : map['averagerating'] as double)
+      popular: map['popular'] ?? false,
+      recommend: map['recommend'] ?? false,
+      totalrating: map['totalrating'] ?? 0 ,
+      averagerating: (map['averagerating'] is int ? (map['averagerating'] as int).toDouble() : 0.0)
     );
   }
 

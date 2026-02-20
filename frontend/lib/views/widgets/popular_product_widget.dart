@@ -31,7 +31,7 @@ class _PopularProductWidgetState extends ConsumerState<PopularProductWidget> {
   Widget build(BuildContext context) {
     final products = ref.watch(productProvider);
     return SizedBox(
-              height: 300,
+              height: MediaQuery.of(context).size.height * 0.35,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
@@ -40,7 +40,7 @@ class _PopularProductWidgetState extends ConsumerState<PopularProductWidget> {
                       final product = products[index];
                       return Column(
                         children: [
-                          ProductItemWidget(product: product),
+                          ModernProductTile(product: product),
                         ],
                       );
                   }

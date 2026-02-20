@@ -92,14 +92,14 @@ class _InnerCategoryScreenState extends ConsumerState<InnerSubcategoryContentWid
             ReuseableTextWidget(title: "Popular Product", subtitle: 'view all'),
 
                     SizedBox(
-                      height: 300,
+                      height: MediaQuery.of(context).size.height*0.35,
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           itemCount: products.length,
                           itemBuilder: (context,index){
                             final product = products[index];
-                            return ProductItemWidget(product: product);
+                            return ModernProductTile(product: product);
                           }
                       ),
                     )

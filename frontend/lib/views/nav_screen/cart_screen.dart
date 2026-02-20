@@ -25,7 +25,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
-          child: HeaderWidget()
+          child: HeaderWidget2()
       ),
       body: _cartProvider.getCartItems.isEmpty ? Center(
         child: Column(
@@ -89,7 +89,6 @@ class _CartScreenState extends ConsumerState<CartScreen> {
               },
               child: Container(
                 height: 82,
-                width: 150,
                 decoration: BoxDecoration(
                   color: _cartProvider.calculateTotalAmount() == 0.0 ? Colors.grey.shade400 : Colors.blueAccent,
                   borderRadius: BorderRadius.circular(20)

@@ -2,6 +2,7 @@ import 'package:frontend/controller/product_controller.dart';
 import 'package:frontend/model/product.dart';
 import 'package:frontend/views/widgets/product_item_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SearchProductScreen extends StatefulWidget {
   const SearchProductScreen({super.key});
@@ -39,63 +40,98 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final crossAxisCount = screenWidth < 600 ? 2 : 4;
-    final childAspectRatio = screenWidth < 600 ? 3/4.5 : 4/5;
+    const backgroundColor = Color(0xffeaeaea);
     return Scaffold(
-      appBar: AppBar(
-        title: TextField(
-          controller: searchController,
-          decoration: InputDecoration(
-            hintText: "Search Here...",
-            filled: true,
-            fillColor: Colors.grey.shade400,
-            contentPadding: EdgeInsets.all(10),
-            hintStyle: TextStyle(color: Colors.black),
-            prefixIcon: Icon(Icons.camera_alt, color: Colors.black),
-            suffixIcon: InkWell(onTap:()=>searchProduct(searchController.text.trim()),child: Icon(Icons.search, color: Colors.black)),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black, width: 2), // optional: make it thicker on focus
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.white),
-            ),
-            enabled: true,
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black, width: 2), // optional: make it thicker on focus
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black),
-            ),
-          ),
-          style: TextStyle(color: Colors.black), // make typed text white too
-        ),
-      ),
-      body: Column(
-        children: [
-          SizedBox(height: 20,),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: crossAxisCount,
-                  childAspectRatio: childAspectRatio,
-                  mainAxisSpacing: 8,
-                  crossAxisSpacing: 8
+      backgroundColor:backgroundColor,
+        appBar:  AppBar(
+          backgroundColor: Color(0xff0f4c81),
+      toolbarHeight:80,
+      leading: IconButton(onPressed: (){
+        Navigator.pop(context);
+      }, icon: Icon(Icons.arrow_back_ios_new_rounded,color: Colors.white,)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(35),)
+        ,),
+          title: TextField(
+            controller: searchController,
+            textInputAction: TextInputAction.search,
+            onSubmitted: (value){
+              if(value.isNotEmpty) {
+                searchProduct(value);
+              }
+            },
+            decoration: InputDecoration(
+              hintText: 'Search products, brands and categories',
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide.none
+              ),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide.none
+              ),
+              hintStyle: TextStyle(
+                color: Colors.grey.shade500,
+                fontSize: 14,
+              ),
+              fillColor: Colors.white,
+              filled: true,
+              prefixIcon: Container(
+                margin: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: const Color(0xff0f4c81),
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                shrinkWrap: true,
-                itemCount: searchedProducts.length,
-                itemBuilder: (context,index){
-                  final product = searchedProducts[index];
-                  return ProductItemWidget(
-                      product: product
-                  );
-                }
+                child: const Icon(
+                  Icons.camera_alt,
+                  size: 20,
+                  color: Colors.white,
+                ),
+              ),
+              suffixIcon:IconButton(
+                onPressed: (){
+                  if(searchController.text.isNotEmpty) {
+                    searchProduct(searchController.text);
+                  }
+                },
+                icon: const Icon(
+                  Icons.search_rounded,
+                  color: Color(0xff0f4c81),
+                ),
+              ),
+              border: InputBorder.none,
+              contentPadding: const EdgeInsets.symmetric(vertical: 16),
             ),
           ),
-        ],
+        ),
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          children: [
+          AnimatedSwitcher(
+                duration: Duration(milliseconds: 350),
+                child: searchedProducts.isEmpty ? Center(child: Text("No Products Found",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.grey),),): Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: crossAxisCount,
+                        mainAxisExtent: MediaQuery.of(context).size.height * 0.35,
+                          mainAxisSpacing: 4,
+                        crossAxisSpacing: 4
+                      ),
+                      shrinkWrap: true,
+                      itemCount: searchedProducts.length,
+                      itemBuilder: (context,index){
+                        final product = searchedProducts[index];
+                        return ModernProductTile(product: product);
+                      }
+                  ),
+                ),
+              ),
+            
+          ]
+        ),
       ),
     );
   }

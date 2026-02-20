@@ -44,7 +44,7 @@ class _ProductDetailsScreenState extends ConsumerState<ProductDetailsScreen> {
   Widget build(BuildContext context) {
     final cart = ref.read(cartProvider.notifier);
     final cartProviderData = ref.watch(cartProvider);
-    final favourite = ref.read(favouriteProvider.notifier);
+    final favourite = ref.watch(favouriteProvider.notifier);
     ref.watch(favouriteProvider);
     final isInCart = cartProviderData.containsKey(widget.product.id);
     final isInWishList = favourite.getFavouriteItem.containsKey(widget.product.id);
@@ -61,19 +61,26 @@ class _ProductDetailsScreenState extends ConsumerState<ProductDetailsScreen> {
         ),
         actions: [
           IconButton(
-              onPressed: isInWishList ? null : (){
-                favourite.addToFavourite(
-                    productName: widget.product.productName,
-                    productPrice: widget.product.productPrice,
-                    category: widget.product.category,
-                    vendorId: widget.product.vendorId,
-                    images: widget.product.images,
-                    productId: widget.product.id,
-                    description: widget.product.description,
-                    productQuantity: widget.product.productQuantity,
-                    fullname: widget.product.fullname
-                );
-                showSnackBar(context, "Added To Wishlist");
+              onPressed: (){
+                if(isInWishList){
+                  favourite.removeFavouriteProduct(widget.product.id);
+                  showSnackBar(context, "Removed From The Wishlist");
+                }
+                else{
+                  favourite.addToFavourite(
+                      productName: widget.product.productName,
+                      productPrice: widget.product.productPrice,
+                      category: widget.product.category,
+                      vendorId: widget.product.vendorId,
+                      images: widget.product.images,
+                      productId: widget.product.id,
+                      description: widget.product.description,
+                      productQuantity: widget.product.productQuantity,
+                      fullname: widget.product.fullname
+                  );
+                  showSnackBar(context, "Added To Wishlist");
+                }
+
               },
               icon: favourite.getFavouriteItem.containsKey(widget.product.id) ? Icon(
                 Icons.favorite,
@@ -156,16 +163,17 @@ class _ProductDetailsScreenState extends ConsumerState<ProductDetailsScreen> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Row(
-                  children: [
-                    Icon(Icons.star,color: Colors.amber,),
-                    Text(widget.product.averagerating.toStringAsFixed(1),style: GoogleFonts.montserrat(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.grey.shade600),),
-                    Text('(${widget.product.totalrating.toString()})',style: GoogleFonts.montserrat(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.grey.shade600),)
-                  ],
+              if(widget.product.totalrating!=0)
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Row(
+                    children: [
+                      Icon(Icons.star,color: Colors.amber,),
+                      Text(widget.product.averagerating.toStringAsFixed(1),style: GoogleFonts.montserrat(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.grey.shade600),),
+                      Text('(${widget.product.totalrating.toString()})',style: GoogleFonts.montserrat(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.grey.shade600),)
+                    ],
+                  ),
                 ),
-              ),
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Text(widget.product.category,style: GoogleFonts.quicksand(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.grey.shade600),),
@@ -191,7 +199,7 @@ class _ProductDetailsScreenState extends ConsumerState<ProductDetailsScreen> {
                       itemBuilder: (context,index){
 
                         final product = relatedProduct[index];
-                        return ProductItemWidget(
+                        return ModernProductTile(
                             product: product
                         );
                       }

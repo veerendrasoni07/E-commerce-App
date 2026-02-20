@@ -62,7 +62,7 @@ class _InnerSubcategoryProductScreenState extends ConsumerState<InnerSubcategory
             ),
             itemBuilder: (context,index){
             final product = products[index];
-            return ProductItemWidget(product: product);
+            return ModernProductTile(product: product);
             }
         ),
       ),

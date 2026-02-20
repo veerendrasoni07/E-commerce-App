@@ -63,7 +63,7 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 20),
-        child: HeaderWidget(),
+        child: HeaderWidget2(),
       ),
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

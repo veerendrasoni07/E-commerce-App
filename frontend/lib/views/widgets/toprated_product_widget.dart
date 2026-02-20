@@ -40,7 +40,7 @@ class _TopratedProductWidgetState extends ConsumerState<TopratedProductWidget> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ProductItemWidget(product: product),
+                ModernProductTile(product: product),
               ],
             );
           }

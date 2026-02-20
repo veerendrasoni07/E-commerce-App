@@ -13,6 +13,7 @@ class ProductController{
       http.Response response = await http.get(Uri.parse('$uri/api/popular-product'),headers: <String,String>{"Content-Type":"application/json; charset=UTF-8"});
 
       if(response.statusCode == 200){
+        print(response.body);
         List<dynamic> data = jsonDecode(response.body);
         List<Product> product = data.map((product)=> Product.fromJson(product)).toList();
         return product;
