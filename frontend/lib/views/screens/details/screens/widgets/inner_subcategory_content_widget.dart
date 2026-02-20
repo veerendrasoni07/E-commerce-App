@@ -14,6 +14,8 @@ import 'package:frontend/views/widgets/reuseable_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../search_product_screen.dart';
+
 class InnerSubcategoryContentWidget extends ConsumerStatefulWidget {
   final Category category;
   const InnerSubcategoryContentWidget({super.key, required this.category});
@@ -51,9 +53,69 @@ class _InnerCategoryScreenState extends ConsumerState<InnerSubcategoryContentWid
     final subcategories = ref.watch(subCategoryProvider);
     final products = ref.watch(innerPopularProductProvider);
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 20),
-        child: InnerHeaderWidget(onTap: (){},controller:controller ,),
+      appBar: AppBar(
+        backgroundColor: Color(0xff0f4c81),
+        toolbarHeight:80,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(28),)
+          ,),
+        leading: IconButton(
+          onPressed: (){
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios_new_rounded,color: Colors.white),
+        ) ,
+        title: TextField(
+          readOnly: true,
+          textInputAction: TextInputAction.search,
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchProductScreen()));
+          },
+          decoration: InputDecoration(
+            hintText: 'Search products, brands and categories',
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide.none
+            ),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide.none
+            ),
+            hintStyle: TextStyle(
+              color: Colors.grey.shade500,
+              fontSize: 14,
+            ),
+            fillColor: Colors.white,
+            filled: true,
+            prefixIcon: Container(
+              margin: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: const Color(0xff0f4c81),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Icon(
+                Icons.camera_alt,
+                size: 20,
+                color: Colors.white,
+              ),
+            ),
+            suffixIcon:IconButton(
+              onPressed: (){
+
+              },
+              icon: const Icon(
+                Icons.search_rounded,
+                color: Color(0xff0f4c81),
+              ),
+            ),
+            border: InputBorder.none,
+            contentPadding: const EdgeInsets.symmetric(vertical: 16),
+          ),
+        ),
+        actions: [
+          IconButton(onPressed: (){}, icon: Icon(Icons.support_agent_rounded,color: Colors.white,))
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -89,20 +151,27 @@ class _InnerCategoryScreenState extends ConsumerState<InnerSubcategoryContentWid
 
               ],
             ),
-            ReuseableTextWidget(title: "Popular Product", subtitle: 'view all'),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                children: [
+                  ReuseableTextWidget(title: "Popular Product", subtitle: 'view all'),
 
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height*0.35,
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          itemCount: products.length,
-                          itemBuilder: (context,index){
-                            final product = products[index];
-                            return ModernProductTile(product: product);
-                          }
-                      ),
-                    )
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height*0.35,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
+                                itemCount: products.length,
+                                itemBuilder: (context,index){
+                                  final product = products[index];
+                                  return ModernProductTile(product: product);
+                                }
+                            ),
+                          ),
+                ],
+              ),
+            )
 
           ],
         ),

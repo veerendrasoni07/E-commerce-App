@@ -15,10 +15,11 @@ class ModernProductTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _cartProvider = ref.watch(cartProvider.notifier);
+    final cartNotifier = ref.read(cartProvider.notifier);
+    final _cartProvider = ref.watch(cartProvider);
     final favouriteState = ref.watch(favouriteProvider);
     final favouriteNotifier = ref.read(favouriteProvider.notifier);
-
+    final isInCart = _cartProvider.containsKey(product.id);
     final isInWishList = favouriteState.containsKey(product.id);
     return  InkWell(
       onTap: (){
@@ -80,31 +81,37 @@ class ModernProductTile extends ConsumerWidget {
                       right: 5,
                       child: InkWell(
                           onTap: (){
-                            _cartProvider.addToCart(
-                                productName: product.productName,
-                                productPrice: product.productPrice,
-                                category:product.category,
-                                vendorId: product.vendorId,
-                                images: product.images,
-                                productId: product.id,
-                                description: product.description,
-                                productQuantity: product.productQuantity,
-                                quantity: 1,
-                                fullname: product.fullname
-                            );
-                            final snackBar = SnackBar(
-                                elevation: 0,
-                                behavior: SnackBarBehavior.floating,
-                                backgroundColor: Colors.transparent,
-                                content: AwesomeSnackbarContent(
-                                    title: "Congratulations!",
-                                    message: "Successfully Added to Cart",
-                                    contentType: ContentType.success
-                                ));
-                            ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
+                            if(isInCart){
+                              cartNotifier.removeProduct(product.id);
+                              showSnackBar(context, "Removed From Cart");
+                            }
+                            else{
+                              cartNotifier.addToCart(
+                                  productName: product.productName,
+                                  productPrice: product.productPrice,
+                                  category:product.category,
+                                  vendorId: product.vendorId,
+                                  images: product.images,
+                                  productId: product.id,
+                                  description: product.description,
+                                  productQuantity: product.productQuantity,
+                                  quantity: 1,
+                                  fullname: product.fullname
+                              );
+                              final snackBar = SnackBar(
+                                  elevation: 0,
+                                  behavior: SnackBarBehavior.floating,
+                                  backgroundColor: Colors.transparent,
+                                  content: AwesomeSnackbarContent(
+                                      title: "Congratulations!",
+                                      message: "Successfully Added to Cart",
+                                      contentType: ContentType.success
+                                  ));
+                              ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
+                            }
 
                           },
-                          child: Icon(Icons.shopping_cart_outlined,color: Colors.black87,)
+                          child: isInCart ? Icon(Icons.shopping_cart_rounded,color: Colors.amber,) : Icon(Icons.shopping_cart_outlined,color: Colors.black87,)
                       )
                   )
                 ],

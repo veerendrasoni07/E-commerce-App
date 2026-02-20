@@ -27,7 +27,6 @@ class _InnerCategoryScreenState extends State<InnerCategoryScreen> {
     InnerSubcategoryContentWidget(category: widget.category,),
     FavScreen(),
     CategoryScreen(),
-    StoreScreen(),
     CartScreen(),
     AccScreen(),
   ];
@@ -57,7 +56,6 @@ class _InnerCategoryScreenState extends State<InnerCategoryScreen> {
             icon: Icon(Icons.category),
             label: "Category",
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.store), label: "Store"),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
             label: "Cart",
