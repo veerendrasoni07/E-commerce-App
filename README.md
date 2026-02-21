@@ -1,4 +1,4 @@
-# 🛍️ FreshCart – Flutter E-Commerce Application
+# 🛍️ Flutter E-Commerce Application
 
 A modern, scalable, and production-ready E-Commerce mobile application built with **Flutter**.
 
