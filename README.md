@@ -163,4 +163,21 @@ The objective was to maintain production-level polish rather than a basic academ
 - Dark mode support  
 - Real-time inventory updates  
 - Push notifications  
-- Caching optimization  
+- Caching optimization
+
+  ## 📸 App Preview
+
+
+<p align="center">
+  <img src="![Screenshot_20260221_194603 jpg](https://github.com/user-attachments/assets/82c4cddf-8dc5-4cea-a315-d384c195e661)" width="250"/>
+  <img src="assets/screenshots/product_detail.png" width="250"/>
+  <img src="assets/screenshots/cart.png" width="250"/>
+</p>
+
+<p align="center">
+  <img src="assets/screenshots/order_history.png" width="250"/>
+  <img src="assets/screenshots/search.png" width="250"/>
+</p> 
+
+
+
