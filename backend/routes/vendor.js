@@ -5,20 +5,26 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 
-vendorRoute.post('/api/v2/vendor/signup',async (req,res)=>{
+vendorRoute.post('/api/vendor/signup',async (req,res)=>{
     try {
-        const data = req.body;
-        const existingUserEmail = await User.findOne({email:data.email});
+        const {email,password,fullname} = req.body;
+        const existingUserEmail = await User.findOne({email});
         if(existingUserEmail){
             return res.status(404).json({msg:"User with same email already exist"});
         }
-        const existingVendor = await Vendor.findOne({email:data.email});
+        const existingVendor = await Vendor.findOne({email});
         if(existingVendor){
             return res.status(401).json({msg:"Vendor with same email already exist!"})
         }
-        const newVendor = new Vendor(data);
-        const response = await newVendor.save();
-        res.status(200).json(response);
+         const hashedPassword = await bcrypt.hash(password, 8);
+        
+            let user = new Vendor({
+              email,
+              password: hashedPassword,
+              fullname,
+            });
+            user = await user.save();
+            res.json(user);
     } catch (error) {
         console.log(error);
         res.status(200).json({error:"Internal Server Error"});
@@ -26,7 +32,7 @@ vendorRoute.post('/api/v2/vendor/signup',async (req,res)=>{
 })
 
 
-vendorRoute.post('/api/v2/vendor/signin',async (req,res)=>{
+vendorRoute.post('/api/vendor/signin',async (req,res)=>{
     try {
         const {email,password} = req.body;
         const vendor = await Vendor.findOne({email});

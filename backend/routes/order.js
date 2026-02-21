@@ -122,7 +122,7 @@ orderRoute.get('/api/orders/vendors/:vendorId',auth,vendorAuth,async (req,res)=>
         const vendorId = req.params.vendorId;
         const order = await Order.find({vendorId});
         if(order.length==0){
-            return res.status(404).json({msg:"Order is not available for this user"})
+            return res.status(404).json({msg:"Order is not available for this vendor"})
         }
         return res.status(200).json(order);
 

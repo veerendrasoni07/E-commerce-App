@@ -5,9 +5,9 @@ dotenv.config();
 // password = QHQuwgsggVb2atnF,
 // username = veerendrasoni0555
 
-const MONGOURL = "mongodb+srv://veerendrasoni05:3plT0RazyKpaTGqR@cluster0.wha5thr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+// const MONGOURL = "mongodb+srv://veerendrasoni05:3plT0RazyKpaTGqR@cluster0.wha5thr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
- mongoose.connect(MONGOURL);
+ mongoose.connect(process.env.MONGOURL);
  
  const db = mongoose.connection;
 
