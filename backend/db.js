@@ -1,5 +1,7 @@
 const mongodb = require('mongodb');
 const  mongoose  = require('mongoose');
+const dotenv = require('dotenv');
+dotenv.config();
 // password = QHQuwgsggVb2atnF,
 // username = veerendrasoni0555
 

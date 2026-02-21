@@ -1,3 +1,5 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
 const app = express();
 const db = require('./db');
@@ -12,6 +14,7 @@ const vendorRoute = require('./routes/vendor');
 const orderRoute = require('./routes/order');
 const otpRouter = require('./routes/otp');
 const cors = require('cors');
+
 
 
 app.use(express.json());

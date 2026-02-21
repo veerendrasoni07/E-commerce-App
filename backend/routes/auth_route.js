@@ -55,8 +55,10 @@ authRouter.post("/api/signin", async (req, res) => {
       return res.status(400).json({ msg: "Incorrect password." });
     }
 
-    const token = jwt.sign({ id: user._id }, "passwordKey",{expiresIn:'1m'});
-    res.json({ token, ...user._doc });
+    const token = jwt.sign({ id: user._id }, "passwordKey");
+    console.log(user._doc);
+    console.log("User signed in successfully");
+    res.json({ token,"user":user._doc });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
@@ -179,7 +181,7 @@ authRouter.post('/api/reset-password',async(req,res)=>{
         }
         const user = await User.findOne({email});
         if(!user) return res.status(401).json({msg:"User doesn't exist"});
-        const hashedPassword = await bcrypt.hash(password,10);
+        const hashedPassword = await bcryptjs.hash(password,10);
         user.password = hashedPassword;
         await user.save();
         console.log("password reset successfully");
@@ -189,6 +191,21 @@ authRouter.post('/api/reset-password',async(req,res)=>{
         res.status(500).json({error:"Internal Server Error"});
     }
 });
+
+authRouter.put('/api/update-address',auth,async(req,res)=>{
+  try {
+    const {state,city,locality}=req.body;
+    const user = await User.findByIdAndUpdate(req.user,{
+      locality,
+      city,
+      state
+    },{new:true});
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({error:"Internal Server Error"});
+  }
+})
 
 
 // route for checking is token is valid or not
