@@ -3,7 +3,7 @@ const Order = require('../models/order');
 const { rmSync } = require('fs');
 const orderRoute = express.Router();
 const {auth,vendorAuth} = require('../middleware/auth');
-const stripe = require('stripe')("sk_test_51RuP6k1yDEUhKcSo4mwXNksRj0sICvINayOlc6TUcNDAIkr4KihjH6J7TN22Gba3Xbo75sB5JGeELtMoJFz6XKUj006zRKw9HB");
+
 
 // route for making an order
 orderRoute.post('/api/order',auth,async(req,res)=>{
