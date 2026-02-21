@@ -168,16 +168,51 @@ The objective was to maintain production-level polish rather than a basic academ
   ## 📸 App Preview
 
 
-<p align="center">
-  <img src="![Screenshot_20260221_194603 jpg](https://github.com/user-attachments/assets/82c4cddf-8dc5-4cea-a315-d384c195e661)" width="250"/>
-  <img src="assets/screenshots/product_detail.png" width="250"/>
-  <img src="assets/screenshots/cart.png" width="250"/>
-</p>
+---
 
-<p align="center">
-  <img src="assets/screenshots/order_history.png" width="250"/>
-  <img src="assets/screenshots/search.png" width="250"/>
-</p> 
+## 📸 Screenshots
+
+### 🏠 Home Page
+![Screenshot_20260221_194603 jpg](https://github.com/user-attachments/assets/dc45e4ff-6b76-414e-812b-451abe409126)
+![Screenshot_20260221_194416 jpg](https://github.com/user-attachments/assets/9f7ad0c3-f130-4c2e-aefe-418678040459)
+
+
+---
+
+### 🔍 Search Functionality
+
+![Screenshot_20260221_194428 jpg](https://github.com/user-attachments/assets/3e90b25f-f30f-457f-9910-9185ad9e1369)
+
+---
+
+### 📦 Product Detail
+
+![Screenshot_20260221_194359 jpg](https://github.com/user-attachments/assets/51392019-001e-4c2b-ad30-1a983ae1de4f)
+![Screenshot_20260221_194404 jpg](https://github.com/user-attachments/assets/bfbc7c69-655c-47ac-92eb-e0550fb4a69c)
+
+---
+
+### 🛒 Cart & Checkout
+![Screenshot_20260221_194525 jpg](https://github.com/user-attachments/assets/52271ce8-d85d-4d3a-928d-4960f96e6492)
+![Screenshot_20260221_194530 jpg](https://github.com/user-attachments/assets/1a273a8e-cc82-4f5f-b759-a66001a11cf2)
+![Screenshot_20260221_194535 jpg](https://github.com/user-attachments/assets/714898ab-354e-4cbd-8e15-02aadc6f04ba)
+
+---
+
+### 📜 Order History
+
+![WhatsApp Image 2026-02-21 at 19 55 32](https://github.com/user-attachments/assets/b9d8a089-4e65-47e1-99f3-f8fe4e1058c3)
+![Screenshot_20260221_194548 jpg](https://github.com/user-attachments/assets/89ea92db-78d6-4a5a-9db1-f66f05258c60)
+
+### Account 
+![Screenshot_20260221_194540 jpg](https://github.com/user-attachments/assets/4f74bd2e-a0c9-417c-bb85-1dc25cc88b0f)
+
+
+### Category 
+![Screenshot_20260221_194509 jpg](https://github.com/user-attachments/assets/81724f53-576b-44fd-b5fb-af701e14b721)
+![Screenshot_20260221_194502 jpg](https://github.com/user-attachments/assets/e50dd0ed-8bdf-4f89-a88f-d47d042f8337)
+![Screenshot_20260221_194455 jpg](https://github.com/user-attachments/assets/ee305b48-f80c-4683-96fc-bb5c7dc02280)
+![Screenshot_20260221_194448 jpg](https://github.com/user-attachments/assets/82696456-3d66-4054-af15-a4b477ff44f0)
 
 
 
