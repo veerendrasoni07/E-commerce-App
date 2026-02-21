@@ -6,10 +6,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CartWidget extends StatelessWidget {
   final Cart cartItem;
+  final bool isOrder;
   void Function()? onDecrement;
   void Function()? onIncrement;
   void Function(BuildContext)? deleteItem;
-  CartWidget({super.key,required this.cartItem,required this.onDecrement,required this.onIncrement,required this.deleteItem});
+  CartWidget({super.key,required this.cartItem,required this.onDecrement,required this.onIncrement,required this.deleteItem,required this.isOrder});
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +61,8 @@ class CartWidget extends StatelessWidget {
                           IconButton(onPressed: onIncrement, icon: Icon(Icons.add_circle_outline,color: Colors.black87,)),
                         ],
                       ),
+                      if(isOrder)
+                        Text("Order Placed",style: GoogleFonts.poppins(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.green),)
 
                     ],
                   ),

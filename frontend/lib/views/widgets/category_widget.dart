@@ -1,5 +1,6 @@
 import 'package:frontend/controller/category_controller.dart';
 import 'package:frontend/provider/categoryProvider.dart';
+import 'package:frontend/views/nav_screen/category_screen.dart';
 import 'package:frontend/views/screens/details/screens/inner_category_screen.dart';
 import 'package:frontend/views/widgets/reuseable_text_widget.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class _CategoryWidgetState extends ConsumerState<CategoryWidget> {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: ReuseableTextWidget(title: "Categories", subtitle: "View All"),
+          child: ReuseableTextWidget(title: "Categories", subtitle: "View All", onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>CategoryScreen()))),
         ),
          GridView.builder(
                 shrinkWrap: true,

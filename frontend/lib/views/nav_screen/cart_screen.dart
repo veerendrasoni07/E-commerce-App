@@ -1,4 +1,5 @@
 import 'package:frontend/provider/cartProvider.dart';
+import 'package:frontend/provider/orderProvider.dart';
 import 'package:frontend/views/screens/details/screens/checkout_screen.dart';
 import 'package:frontend/views/screens/main_screen.dart';
 import 'package:frontend/views/widgets/header_widget.dart';
@@ -22,6 +23,8 @@ class _CartScreenState extends ConsumerState<CartScreen> {
   @override
   Widget build(BuildContext context) {
     final cartData = ref.watch(cartProvider);
+    final order = ref.watch(orderProvider);
+
     final _cartProvider = ref.read(cartProvider.notifier);
     return Scaffold(
       appBar: AppBar(
@@ -96,19 +99,26 @@ class _CartScreenState extends ConsumerState<CartScreen> {
       ) : Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Center(child: Text("My Cart",style: GoogleFonts.marcellusSc(fontSize: 28,fontWeight: FontWeight.bold),)),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Text("My Cart",style: GoogleFonts.poppins(fontSize: 28,fontWeight: FontWeight.bold),),
+          ),
           TextButton(
               onPressed: (){
                 _cartProvider.clearCart();
               },
-              child: Text('Clear The Cart',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.red),)
+              child: Text('Clear The Cart',style: GoogleFonts.montserrat(fontSize: 14,fontWeight: FontWeight.bold,color: Colors.red),)
           ),
           Expanded(
             child: ListView.builder(
               itemCount: cartData.values.toList().length,
                 itemBuilder: (context,index){
                   final cartItem = cartData.values.toList()[index];
+                  final isOrder = order.where((element) => element.productId == cartItem.productId);
+                  print("Is Orderrrrrr");
+                  print(isOrder.isEmpty);
                   return CartWidget(
+                    isOrder: isOrder.isNotEmpty,
                       cartItem: cartItem,
                     onDecrement: (){
                       _cartProvider.decrementQuantity(cartItem.productId,context);
@@ -133,8 +143,9 @@ class _CartScreenState extends ConsumerState<CartScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Total Amount : ${_cartProvider.calculateTotalAmount().toStringAsFixed(2)}",style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.bold),),
+                Text("Total Amount :  ₹${_cartProvider.calculateTotalAmount().toStringAsFixed(2)}",style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.bold),),
                 Text("Delivery Charges : 0",style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.bold),),
               ],
             ),
@@ -143,22 +154,19 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>CheckoutScreen()));
               },
               child: Container(
-                height: 82,
+                height: double.infinity,
                 decoration: BoxDecoration(
                   color: _cartProvider.calculateTotalAmount() == 0.0 ? Colors.grey.shade400 : Colors.blueAccent,
                   borderRadius: BorderRadius.circular(20)
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("Checkout",style: GoogleFonts.poppins(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.white),),
+                      child: Text("Checkout",style: GoogleFonts.poppins(fontWeight: FontWeight.bold,color: Colors.white),),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(Icons.arrow_forward,color: Colors.white,),
-                    )
+                    Icon(Icons.arrow_forward,color: Colors.white,)
                   ],
                 ),
               ),

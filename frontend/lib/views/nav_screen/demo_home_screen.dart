@@ -328,6 +328,7 @@ class _DemoHomeScreenState extends State<DemoHomeScreen> {
               child: ReuseableTextWidget(
                 title: 'Popular Products',
                 subtitle: 'See All',
+                onTap: (){},
               ),
             ),
           ),
@@ -343,6 +344,7 @@ class _DemoHomeScreenState extends State<DemoHomeScreen> {
               child: ReuseableTextWidget(
                 title: 'Top Rated Products',
                 subtitle: 'See All',
+                onTap: (){},
               ),
             ),
           ),

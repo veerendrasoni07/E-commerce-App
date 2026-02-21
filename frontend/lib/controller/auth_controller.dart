@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 import '../global_variables.dart' show uri;
+import '../views/screens/authentication/login_screen.dart';
 
 class AuthService {
   Future<void> signUpUser({
@@ -115,10 +116,13 @@ class AuthService {
     required String locality
   })async{
     try{
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      String? token = preferences.getString('auth-token');
       http.Response response = await http.put(
-          Uri.parse('$uri/api/user/$id'),
+          Uri.parse('$uri/api/update-address'),
           headers: <String,String>{
-            'Content-Type':'application/json; charset=UTF-8'
+            'Content-Type':'application/json; charset=UTF-8',
+            'x-auth-token':token!
           },
           body: jsonEncode({
             'state':state,
@@ -135,7 +139,6 @@ class AuthService {
             SharedPreferences preferences = await SharedPreferences.getInstance();
             await preferences.setString('user', response.body);
             _userProvider.setUser(response.body);
-            // Optional: show a snackbar
             showSnackBar(context, 'Location updated successfully!');
           }
       );
@@ -193,7 +196,7 @@ class AuthService {
 
                           navigator.pushAndRemoveUntil(
                             MaterialPageRoute(
-                              builder: (context) => const SignupScreen(),
+                              builder: (context) => const LoginScreen(),
                             ),
                                 (route) => false,
                           );

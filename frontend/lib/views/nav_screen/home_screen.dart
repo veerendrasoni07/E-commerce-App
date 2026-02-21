@@ -195,6 +195,7 @@ class HomeScreen extends ConsumerWidget {
               child: ReuseableTextWidget(
                 title: 'Popular Products',
                 subtitle: 'See All',
+                onTap: (){},
               ),
             ),
           ),
@@ -210,6 +211,7 @@ class HomeScreen extends ConsumerWidget {
               child: ReuseableTextWidget(
                 title: 'Top Rated Products',
                 subtitle: 'See All',
+                onTap: (){},
               ),
             ),
           ),

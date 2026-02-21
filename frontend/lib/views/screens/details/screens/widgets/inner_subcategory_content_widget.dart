@@ -155,7 +155,7 @@ class _InnerCategoryScreenState extends ConsumerState<InnerSubcategoryContentWid
               padding: const EdgeInsets.all(12.0),
               child: Column(
                 children: [
-                  ReuseableTextWidget(title: "Popular Product", subtitle: 'view all'),
+                  ReuseableTextWidget(title: "Popular Product", subtitle: 'view all',onTap: (){},),
 
                           SizedBox(
                             height: MediaQuery.of(context).size.height*0.35,

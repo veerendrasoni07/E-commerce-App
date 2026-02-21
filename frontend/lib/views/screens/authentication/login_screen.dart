@@ -27,6 +27,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     return Scaffold(
       body: Container(
         width: double.infinity,
+        height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -41,36 +42,26 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 36),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 30),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    'assets/images/login_image.jpg', // Replace with your AI-themed login image
-                    height: 200,
-                  ),
-                ),
+                // ClipRRect(
+                //   borderRadius: BorderRadius.circular(20),
+                //   child: Image.asset(
+                //     'assets/images/login_image.jpg', // Replace with your AI-themed login image
+                //     height: 200,
+                //   ),
+                // ),
                 const SizedBox(height: 20),
                 Text(
-                  "Welcome Back",
+                  "Login",
                   style: GoogleFonts.montserrat(
                     color: Colors.white,
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  "Login to continue your AI-powered learning",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.quicksand(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    height: 1.5,
-                    wordSpacing: 1.5,
-                  ),
-                ),
+
+
                 const SizedBox(height: 30),
 
                 // Email TextField
@@ -156,7 +147,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_)=>ChangePasswordFlow()));
+                    },
                     child: const Text(
                       "Forgot Password?",
                       style: TextStyle(color: Colors.white),
@@ -213,25 +206,25 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 const SizedBox(height: 20),
 
                 // Google Login
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton.icon(
-                    label: Text(
-                      "Login via OTP",
-                      style: GoogleFonts.montserrat(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 24),
-                    ),
-                    style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      side: const BorderSide(color: Colors.white),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_)=>ChangePasswordFlow()));
-                    },
-                  ),
-                ),
+                // SizedBox(
+                //   width: double.infinity,
+                //   child: OutlinedButton.icon(
+                //     label: Text(
+                //       "Login via OTP",
+                //       style: GoogleFonts.montserrat(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 24),
+                //     ),
+                //     style: OutlinedButton.styleFrom(
+                //       padding: const EdgeInsets.symmetric(vertical: 14),
+                //       side: const BorderSide(color: Colors.white),
+                //       shape: RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.circular(20),
+                //       ),
+                //     ),
+                //     onPressed: () {
+                //       Navigator.push(context, MaterialPageRoute(builder: (_)=>ChangePasswordFlow()));
+                //     },
+                //   ),
+                // ),
 
                 const SizedBox(height: 15),
 
@@ -245,7 +238,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>SignupScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpScreen()));
                       },
                       child: const Text(
                         "Register",

@@ -1,5 +1,6 @@
 
 import 'package:frontend/provider/user_provider.dart';
+import 'package:frontend/views/screens/authentication/login_screen.dart';
 import 'package:frontend/views/screens/authentication/register_screen.dart';
 import 'package:frontend/views/screens/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,7 @@ class MyApp extends ConsumerWidget {
               return const CircularProgressIndicator();
             }
             final user = ref.watch(userProvider);
-            return user!=null ? MainScreen() : SignupScreen();
+            return user!=null ? MainScreen() : LoginScreen();
           }
       ),
     );

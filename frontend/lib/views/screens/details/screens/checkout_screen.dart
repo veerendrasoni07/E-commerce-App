@@ -94,7 +94,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
         backgroundColor: Colors.transparent,
         title: Text(
           'Checkout Screen',
-          style: GoogleFonts.marcellusSc(fontSize: 28, fontWeight: FontWeight.bold),
+          style: GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ),
       body: SafeArea(

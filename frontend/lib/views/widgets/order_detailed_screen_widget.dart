@@ -78,7 +78,7 @@ class _OrderDetailedScreenWidgetState extends State<OrderDetailedScreenWidget> {
     print(widget.order.productId);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Order's Detail ",style: GoogleFonts.marcellusSc(fontSize: 28,fontWeight: FontWeight.bold),),
+        title: Text("Order's Detail ",style: GoogleFonts.poppins(fontSize: 24,fontWeight: FontWeight.bold),),
       ),
       body: Column(
         children: [
