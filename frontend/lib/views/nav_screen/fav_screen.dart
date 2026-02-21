@@ -30,7 +30,14 @@ class _FavScreenState extends ConsumerState<FavScreen> {
           ),
         ),
       ),
-      body: ListView.builder(
+      body: favourite.isEmpty ? Center(
+        child: Text(
+          "No Favourite Items",
+          style: GoogleFonts.poppins(
+            textStyle: TextStyle(color: Colors.grey,letterSpacing: 1.5,fontWeight: FontWeight.bold,fontSize: 24),
+          ),
+        ),
+      ) : ListView.builder(
         itemCount: favourite.length,
           itemBuilder: (context,index){
           final favItem = favourite.values.toList()[index];

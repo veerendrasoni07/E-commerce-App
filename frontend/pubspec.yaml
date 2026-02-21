@@ -45,6 +45,8 @@ dependencies:
   flutter_slidable: ^4.0.0
   custom_rating_bar: ^3.0.0
   flutter_stripe: ^11.5.0
+  otp_timer_button: ^1.1.1
+  pinput: ^6.0.1
 
 dev_dependencies:
   flutter_test:
